@@ -41,11 +41,16 @@ namespace API_1.Controllers
         [HttpGet("{id}")]
         public IAsyncResult ListagemPorId()
         {
-            Participation participation = _participationRepository.GetParticipationByID();
-            
-        }
-        [HttpDelete]
+            //return _participationRepository.GetParticipationByID(Id);
 
-       
+            return null;
+        }
+        [HttpDelete("{id}")]
+        public void Deletafilme(int id)
+        {
+            _participationRepository.DeleteParticipation(id);
+           
+        }
+
     }
 }
