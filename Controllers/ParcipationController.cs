@@ -29,7 +29,7 @@ namespace API_1.Controllers
             Participation participation = _mapper.Map<Participation>(participationDto);
             _participationRepository.SaveParticipation(participation);
 
-            return Ok(participation); 
+            return CreatedAtAction(nameof(ListagemPorId), new { Id = participation.Id }, participation);
         }
 
         [HttpGet]
@@ -42,7 +42,7 @@ namespace API_1.Controllers
         public IAsyncResult ListagemPorId()
         {
             Participation participation = _participationRepository.GetParticipationByID();
-            return Ok();
+            
         }
         [HttpDelete]
 
