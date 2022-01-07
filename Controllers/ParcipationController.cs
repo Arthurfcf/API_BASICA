@@ -35,16 +35,16 @@ namespace API_1.Controllers
         [HttpGet]
         public IEnumerable<ParticipationRepository> Listagem()
         {
-            return _participationRepository.GetParticipation();
+            return (IEnumerable<ParticipationRepository>)_participationRepository.GetParticipation();
         }
 
         [HttpGet("{id}")]
         public IAsyncResult ListagemPorId()
         {
-            Participation participation = _participationRepository.GetParticipationByID(Id);
-            return
+            Participation participation = _participationRepository.GetParticipationByID();
+            return Ok();
         }
-
+        [HttpDelete]
 
        
     }
