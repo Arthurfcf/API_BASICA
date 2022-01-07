@@ -41,8 +41,8 @@ namespace API_1.Repositories
 
         public void InsertUsers(Users users)
         {
-            Users user = _banco1Context.users.Add(user);
-           
+             _banco1Context.users.Add(users);
+            _banco1Context.SaveChanges();
         }
 
         public void SaveUsers(Users users)
