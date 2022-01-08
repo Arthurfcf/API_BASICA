@@ -37,7 +37,13 @@ namespace API_1.Repositories
 
         public void InsertParticipation(Participation participation)
         {
-             _banco1Context.Participations.Add(participation);
+            if (participation != null)
+            {
+
+                Console.WriteLine("Participante já existente");
+
+            }
+            _banco1Context.Participations.Add(participation);
             _banco1Context.SaveChanges();
         }
 
