@@ -17,8 +17,25 @@ namespace API_1.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            
             builder.Entity<Participation>().HasKey(x => new { x.Id });
             builder.Entity<Users>().HasKey(x => new { x.Id });
+            builder.Entity<Participation>()
+                .Property(v => v.Value)
+                .IsRequired()
+                .HasPrecision(10, 2);
+            builder.Entity<Participation>()
+                .Property(n => n.FirstName)
+                .IsRequired()
+                .HasMaxLength(50);
+            builder.Entity<Participation>()
+                .Property(n => n.FirstName)
+                .IsRequired()
+                .HasMaxLength(50);
+            builder.Entity<Participation>()
+                .HasData(
+                new Participation { Id = 1, FirstName = "Leonardo", LastName = "Costa", Value = 85 },
+                new Participation { Id = 2, FirstName = "Arthur", LastName = "Ferreira", Value = 80 });
         }
 
        
