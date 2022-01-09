@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "2ZYHoWou7pTuz2wgLAzcUn3ZiayWRQ7R01fAtKPWx1hZwobZhxxwTXf1IUAqS9IVcoeFjU8AMo31MsDFZ0BA5A==",
+  "dgSpecHash": "AcN+C4F52d43yFj7L6CnzBgr5oPMNdxfK1E0rjxj1lUinGU7Gj0XLYBNoTQbT88pwLa3vNDvVjirAeeduU/sCA==",
   "success": true,
   "projectFilePath": "C:\\Users\\arthur.ferreira\\source\\repos\\API_1\\API_1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\arthur.ferreira\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\arthur.ferreira\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+    "C:\\Users\\arthur.ferreira\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\arthur.ferreira\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\arthur.ferreira\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\arthur.ferreira\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",

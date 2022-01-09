@@ -32,12 +32,12 @@ namespace API_1.Context
                 .Property(n => n.FirstName)
                 .IsRequired()
                 .HasMaxLength(50);
-            builder.Entity<Participation>()
+          /*  builder.Entity<Participation>()
                 .HasData(
                 new Participation { Id = 1, FirstName = "Leonardo", LastName = "Costa", Value = 85 },
-                new Participation { Id = 2, FirstName = "Arthur", LastName = "Ferreira", Value = 80 });
+                new Participation { Id = 2, FirstName = "Arthur", LastName = "Ferreira", Value = 70 });
+          */
         }
-
        
     }
 }

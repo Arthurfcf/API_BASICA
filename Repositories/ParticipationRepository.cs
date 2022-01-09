@@ -1,6 +1,7 @@
 ﻿using API_1.Context;
 using API_1.Entidades;
 using AutoMapper;
+using Dapper;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,8 +10,12 @@ using System.Threading.Tasks;
 
 namespace API_1.Repositories
 {
+
     public class ParticipationRepository : IParticipation
+
     {
+
+        /*
         private readonly Banco1Context _banco1Context;
        
         public ParticipationRepository(Banco1Context context)
@@ -48,6 +53,31 @@ namespace API_1.Repositories
         }
 
         public void SaveParticipation(Participation participation)
+        {
+            throw new NotImplementedException();
+        }*/
+        private DbSession _db;
+        public Task<int> DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Participation>> GetParticipationsAsync()
+        {
+           using (var conn = _db.Connection)
+            {
+                string query = "SELECT * FROM Participation";
+                List<Participation> participations = (await conn.QueryAsync<Participation>(sql: query)).ToList();
+                return participations;
+            }
+        }
+
+        public Task<Participation> GetParticipationsIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> SaveAsync(Participation participation)
         {
             throw new NotImplementedException();
         }

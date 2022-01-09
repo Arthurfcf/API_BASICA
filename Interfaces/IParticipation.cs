@@ -9,10 +9,9 @@ namespace API_1.Repositories
 {
     interface IParticipation
     {
-        IEnumerable<Participation> GetParticipation();
-        Participation GetParticipationByID(int Id);
-        void InsertParticipation(Participation participation);
-        void DeleteParticipation(int Id);
-        void SaveParticipation(Participation participation);
+        Task<List<Participation>> GetParticipationsAsync();
+        Task<Participation> GetParticipationsIdAsync(int id);
+        Task<int> SaveAsync(Participation participation);
+        Task<int> DeleteAsync(int id);
     }
 }

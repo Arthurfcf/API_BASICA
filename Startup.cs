@@ -32,6 +32,7 @@ namespace API_1
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<DbSession>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContext<Banco1Context>(options => options.UseSqlServer("Server=.,Database=Banco1;trusted_Connection=true;MultipleactiveResultSets=true"));
             services.AddTransient< IParticipation, ParticipationRepository>();
