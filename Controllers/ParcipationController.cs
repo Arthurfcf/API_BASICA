@@ -24,32 +24,34 @@ namespace API_1.Controllers
 
 
         [HttpPost]
-        public async IActionResult Adicionar([FromBody]ParticipationDto participationDto)
+        public async Task<IActionResult> SaveAsync([FromBody]ParticipationDto participationDto)
         {
             Participation participation = _mapper.Map<Participation>(participationDto);
-            _participationRepository.SaveAsync(participation);
-
-            return await CreatedAtAction(nameof(ListagemPorId), new { Id = participation.Id }, participation);
+            var result = await _participationRepository.SaveAsync(participation);
+            return Ok(result);
+           
         }
 
         [HttpGet]
-        public IEnumerable<ParticipationRepository> Listagem()
+        [Route("participation")]
+        public async Task<IActionResult> GetParticipationsAsync()
         {
-            return (IEnumerable<ParticipationRepository>)_participationRepository.GetParticipation();
+            var result = await _participationRepository.GetParticipationsAsync();
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public IAsyncResult ListagemPorId()
+        public async Task<IActionResult> GetParticipationsIdAsync(int id)
         {
-            //return _participationRepository.GetParticipationByID(Id);
+            var result = await _participationRepository.GetParticipationsIdAsync(id);
 
-            return null;
+            return Ok(result);
         }
         [HttpDelete("{id}")]
-        public void Deletafilme(int id)
+        public async Task<ActionResult> DeleteAsync(int id)
         {
-            _participationRepository.DeleteParticipation(id);
-           
+            var result = await _participationRepository.DeleteAsync(id);
+            return Ok(result);
         }
 
     }

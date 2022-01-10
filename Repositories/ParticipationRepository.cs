@@ -1,4 +1,5 @@
 ﻿using API_1.Context;
+using API_1.DTOs;
 using API_1.Entidades;
 using AutoMapper;
 using Dapper;
@@ -35,6 +36,11 @@ namespace API_1.Repositories
                 List<Participation> participations = (await conn.QueryAsync<Participation>(sql: query)).ToList();
                 return participations;
             }
+        }
+
+        internal Task SaveAsync(ParticipationDto participationDto)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Participation> GetParticipationsIdAsync(int id)
