@@ -1,9 +1,12 @@
 ﻿using API_1.DTOs;
 using API_1.Entidades;
 using API_1.Repositories;
+using API_1.Services;
 using API_1.Servicos;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace API_1.Controllers
@@ -32,8 +35,21 @@ namespace API_1.Controllers
 
         [HttpGet]
         [Route("participation")]
-        public async Task<IActionResult> GetParticipationsAsync()
+        public async Task<IActionResult> GetAll()
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                return Ok(await _service.GetAll());
+
+            }catch(ArgumentException e)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
+
             var result = await _service.GetAll();
             return Ok(result);
         }
@@ -53,4 +69,6 @@ namespace API_1.Controllers
         }
 
     }
+
+    
 }

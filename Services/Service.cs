@@ -18,6 +18,7 @@ namespace API_1.Servicos
         }
         public async Task<int> Delete(int id)
         {
+            
             return await _repository.DeleteAsync(id);
         }
 
