@@ -9,11 +9,9 @@ namespace API_1.Repositories
 {
     interface IUsers
     {
-
-        IEnumerable GetUsers();
-        Users GetUsersByID(int Id);
-        void InsertUsers(Users users);
-        void DeleteUsers(int Id);
-        void SaveUsers(Users users);
+        Task<List<Users>> GetParticipationsAsync();
+        Task<Users> GetParticipationsIdAsync(int id);
+        Task<int> SaveAsync(Users users);
+        Task<int> DeleteAsync(int id);
     }
 }

@@ -57,9 +57,14 @@ namespace API_1.Repositories
             throw new NotImplementedException();
         }*/
         private DbSession _db;
-        public Task<int> DeleteAsync(int id)
+        public async Task<int> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+           using ( var conn = _db.Connection)
+            {
+                string command = @"DELETE FROM Participation WHERE Id = @id";
+                var result = await conn.ExecuteAsync(sql: command, param: new { id });
+                return result;
+            }
         }
 
         public async Task<List<Participation>> GetParticipationsAsync()
@@ -72,14 +77,28 @@ namespace API_1.Repositories
             }
         }
 
-        public Task<Participation> GetParticipationsIdAsync(int id)
+        public async Task<Participation> GetParticipationsIdAsync(int id)
         {
-            throw new NotImplementedException();
+            using (var conn = _db.Connection)
+            {
+                string query = "SELECT * FROM Participation WHERE Id = @id";
+                Participation participation = await conn.QueryFirstOrDefaultAsync<Participation>
+                    (sql: query, param: new { id });
+                return participation;
+
+            }
         }
 
-        public Task<int> SaveAsync(Participation participation)
+        public async Task<int> SaveAsync(Participation participation)
         {
-            throw new NotImplementedException();
+            using (var conn = _db.Connection)
+            {
+                string command = @"INSERT INTO Participation(FirstName, LastName, Value)
+                                VALUES(@FirstName, @LastName, @Value)";
+
+                var result = await conn.ExecuteAsync(sql: command, param: new Participation());
+                return result;
+            }
         }
     }
 }
