@@ -1,11 +1,9 @@
 ﻿using API_1.DTOs;
 using API_1.Entidades;
 using API_1.Repositories;
+using API_1.Servicos;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace API_1.Controllers
@@ -13,12 +11,12 @@ namespace API_1.Controllers
     [Controller][Route("controller")]
     public class ParcipationController : ControllerBase
     {
-        private ParticipationRepository _participationRepository;
-        private IMapper _mapper;
+        private readonly Service _service;
+        private readonly IMapper _mapper;
 
-        public  ParcipationController(ParticipationRepository participationRepository, Mapper mapper)
+        public  ParcipationController(Service service , Mapper mapper)
         {
-            _participationRepository = participationRepository;
+            _service = service;
             _mapper = mapper;
         }
 
@@ -27,7 +25,7 @@ namespace API_1.Controllers
         public async Task<IActionResult> SaveAsync([FromBody]ParticipationDto participationDto)
         {
             Participation participation = _mapper.Map<Participation>(participationDto);
-            var result = await _participationRepository.SaveAsync(participation);
+            var result = await _service.Post(participation);
             return Ok(result);
            
         }
@@ -36,21 +34,21 @@ namespace API_1.Controllers
         [Route("participation")]
         public async Task<IActionResult> GetParticipationsAsync()
         {
-            var result = await _participationRepository.GetParticipationsAsync();
+            var result = await _service.GetAll();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetParticipationsIdAsync(int id)
         {
-            var result = await _participationRepository.GetParticipationsIdAsync(id);
+            var result = await _service.Get(id);
 
             return Ok(result);
         }
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
-            var result = await _participationRepository.DeleteAsync(id);
+            var result = await _service.Delete(id);
             return Ok(result);
         }
 

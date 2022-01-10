@@ -36,7 +36,6 @@ namespace API_1
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContext<Banco1Context>(options => options.UseSqlServer("Server=.,Database=Banco1;trusted_Connection=true;MultipleactiveResultSets=true"));
             services.AddTransient< IParticipation, ParticipationRepository>();
-            services.AddTransient<IUsers, UsersRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

@@ -18,7 +18,9 @@ namespace API_1.Context
 
         }
 
-        public void Dispose() => Connection?.Dispose();
-       
+        void IDisposable.Dispose()
+        {
+            Connection?.Dispose();
+        }
     }
 }
