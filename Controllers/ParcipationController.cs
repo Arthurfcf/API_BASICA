@@ -16,7 +16,7 @@ namespace API_1.Controllers
         private ParticipationRepository _participationRepository;
         private IMapper _mapper;
 
-        public ParcipationController(ParticipationRepository participationRepository, Mapper mapper)
+        public  ParcipationController(ParticipationRepository participationRepository, Mapper mapper)
         {
             _participationRepository = participationRepository;
             _mapper = mapper;
@@ -24,12 +24,12 @@ namespace API_1.Controllers
 
 
         [HttpPost]
-        public IActionResult Adicionar([FromBody]ParticipationDto participationDto)
+        public async IActionResult Adicionar([FromBody]ParticipationDto participationDto)
         {
             Participation participation = _mapper.Map<Participation>(participationDto);
-            _participationRepository.SaveParticipation(participation);
+            _participationRepository.SaveAsync(participation);
 
-            return CreatedAtAction(nameof(ListagemPorId), new { Id = participation.Id }, participation);
+            return await CreatedAtAction(nameof(ListagemPorId), new { Id = participation.Id }, participation);
         }
 
         [HttpGet]

@@ -15,47 +15,7 @@ namespace API_1.Repositories
 
     {
 
-        /*
-        private readonly Banco1Context _banco1Context;
        
-        public ParticipationRepository(Banco1Context context)
-        {
-            _banco1Context = context;
-            
-        }
-
-        public void DeleteParticipation(int Id)
-        {
-            Participation participation = _banco1Context.Participations.Find(Id);
-            _banco1Context.Participations.Remove(participation);
-        }
-
-        public IEnumerable<Participation> GetParticipation()
-        {
-            return _banco1Context.Participations.ToList();
-        }
-
-        public Participation GetParticipationByID(int Id)
-        {
-            return _banco1Context.Participations.Find(Id);
-        }
-
-        public void InsertParticipation(Participation participation)
-        {
-            if (participation != null)
-            {
-
-                Console.WriteLine("Participante já existente");
-
-            }
-            _banco1Context.Participations.Add(participation);
-            _banco1Context.SaveChanges();
-        }
-
-        public void SaveParticipation(Participation participation)
-        {
-            throw new NotImplementedException();
-        }*/
         private DbSession _db;
         public async Task<int> DeleteAsync(int id)
         {
@@ -96,7 +56,7 @@ namespace API_1.Repositories
                 string command = @"INSERT INTO Participation(FirstName, LastName, Value)
                                 VALUES(@FirstName, @LastName, @Value)";
 
-                var result = await conn.ExecuteAsync(sql: command, param: new Participation());
+                var result = await conn.ExecuteAsync(sql: command, param: participation);
                 return result;
             }
         }

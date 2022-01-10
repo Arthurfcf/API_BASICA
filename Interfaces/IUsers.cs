@@ -9,8 +9,8 @@ namespace API_1.Repositories
 {
     interface IUsers
     {
-        Task<List<Users>> GetParticipationsAsync();
-        Task<Users> GetParticipationsIdAsync(int id);
+        Task<List<Users>> GetUsersAsync();
+        Task<Users> GetUsersIdAsync(int id);
         Task<int> SaveAsync(Users users);
         Task<int> DeleteAsync(int id);
     }
