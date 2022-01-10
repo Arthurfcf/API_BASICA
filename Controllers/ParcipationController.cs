@@ -27,10 +27,29 @@ namespace API_1.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveAsync([FromBody]ParticipationDto participationDto)
         {
-            Participation participation = _mapper.Map<Participation>(participationDto);
-            var result = await _service.Post(participation);
-            return Ok(result);
            
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+           try
+            {
+                Participation participation = _mapper.Map<Participation>(participationDto);
+                var result = await _service.Post(participation);
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+                
+            }
+            catch (ArgumentException e)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
         }
 
         [HttpGet]
@@ -50,22 +69,40 @@ namespace API_1.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
 
-            var result = await _service.GetAll();
-            return Ok(result);
+           
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetParticipationsIdAsync(int id)
+        public async Task<IActionResult> GetAll(int id)
         {
-            var result = await _service.Get(id);
-
-            return Ok(result);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                return Ok(await _service.Get(id));
+            }
+            catch (ArgumentException e)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
         }
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
-            var result = await _service.Delete(id);
-            return Ok(result);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                return Ok(await _service.Delete(id));
+            }
+            catch (ArgumentException e)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
         }
 
     }
