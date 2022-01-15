@@ -16,10 +16,11 @@ namespace API_1.Servicos
         {
             _repository = repository;
         }
-        public async Task<int> Delete(int id)
+        public async Task<Participation> Delete(int id)
         {
-            
-            return await _repository.DeleteAsync(id);
+             
+                return await _repository.DeleteAsync(id);        
+           
         }
 
         public async Task<Participation> Get(int id)
@@ -32,11 +33,12 @@ namespace API_1.Servicos
             return await _repository.GetParticipationsAsync();
         }
 
-        public async Task<Participation> Post(Participation participation)
+        public async Task<Participation> Save(Participation participation)
         {
-            return null;
+           
+            return  await _repository.SaveAsync(participation);
         }
 
-     
+       
     }
 }

@@ -11,6 +11,11 @@ using System.Threading.Tasks;
 
 namespace API_1.Controllers
 {
+    //Usar Dapper 
+    //Deixar o Dto
+    //Mudar o nome dos métodos  
+    //Padrão Save, Delete  e Get 
+    //Classe nome Participation + Objetivo Service ou Repo ex
     [Controller][Route("controller")]
     public class ParcipationController : ControllerBase
     {
@@ -25,6 +30,8 @@ namespace API_1.Controllers
 
 
         [HttpPost]
+        //objeto de entrada 
+        // true ou false 
         public async Task<IActionResult> SaveAsync([FromBody]ParticipationDto participationDto)
         {
            
@@ -35,7 +42,7 @@ namespace API_1.Controllers
            try
             {
                 Participation participation = _mapper.Map<Participation>(participationDto);
-                var result = await _service.Post(participation);
+                var result = await _service.Save(participation);
                 if (result != null)
                 {
                     return Ok(result);
@@ -52,6 +59,8 @@ namespace API_1.Controllers
             }
         }
 
+        // lista de objetos 
+        //sem parametros de entrada
         [HttpGet]
         [Route("participation")]
         public async Task<IActionResult> GetAll()
@@ -73,6 +82,8 @@ namespace API_1.Controllers
         }
 
         [HttpGet("{id}")]
+        //return objeto 
+        // entrar um id 
         public async Task<IActionResult> GetAll(int id)
         {
             if (!ModelState.IsValid)
@@ -88,6 +99,8 @@ namespace API_1.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
         }
+
+        //true ou false
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {

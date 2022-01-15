@@ -4,26 +4,31 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API_1.Entidades
+namespace API_1.Models
 {
-    public class Participation
+    public class ParticipationModel
     {
+
+
         [Key]
-        [Required]
         public int Id { get; set; }
 
-        [Required][MaxLength(50)][MinLength(3)]
+        [Required]
+        [MaxLength(50)]
+        [MinLength(3)]
         public string FirstName { get; set; }
 
-        [Required][MaxLength(50)][MinLength(3)]
+        [Required]
+        [MaxLength(50)]
+        [MinLength(3)]
         public string LastName { get; set; }
 
         [Required]
         public float Value { get; set; }
 
-        public static implicit operator Participation(int v)
-        {
-            throw new NotImplementedException();
-        }
+
+
+
+
     }
 }

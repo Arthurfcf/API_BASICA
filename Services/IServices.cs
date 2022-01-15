@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace API_1.Services
 {
-   public  interface IServices
+    public interface IServices
     {
         Task<Participation> Get(int id);
          
         Task<IEnumerable<Participation>> GetAll();
 
-        Task<Participation> Post(Participation participation);
+        Task<Participation> Save(Participation participation);
 
-        Task<int> Delete (int id);
+        Task<Participation> Delete (int id);
     }
 }

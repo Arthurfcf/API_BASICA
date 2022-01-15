@@ -15,14 +15,19 @@ namespace API_1.Repositories
 
     {
 
-       
+
         private readonly DbSession _db;
-        public async Task<int> DeleteAsync(int id)
+        public async Task<Participation> DeleteAsync(int id)
         {
             using var conn = _db.Connection;
-            string command = @"DELETE FROM Participation WHERE Id = @id";
-            var result = await conn.ExecuteAsync(sql: command, param: new { id });
-            return result;
+            if (id != 0)
+            {
+                string command = @"DELETE FROM Participation WHERE Id = @id";
+                Participation participation = await conn.ExecuteAsync(sql: command, param: new { id });
+                return participation;
+            }
+            return 0;
+
         }
 
         public async Task<List<Participation>> GetParticipationsAsync()
@@ -33,10 +38,7 @@ namespace API_1.Repositories
             return participations;
         }
 
-        internal Task SaveAsync(ParticipationDto participationDto)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public async Task<Participation> GetParticipationsIdAsync(int id)
         {
@@ -47,16 +49,21 @@ namespace API_1.Repositories
             return participation;
         }
 
-        public async Task<int> SaveAsync(Participation participation)
-        {
-            using var conn = _db.Connection;
-            string command = @"INSERT INTO Participation(FirstName, LastName, Value)
-                                VALUES(@FirstName, @LastName, @Value)";
-
-            var result = await conn.ExecuteAsync(sql: command, param: participation);
-            return result;
-        }
-
        
+
+        public async Task<Participation> SaveAsync(Participation participation)
+        {
+
+            using var conn = _db.Connection;
+                string command = @"INSERT INTO Participation(FirstName, LastName, Value)
+                                VALUES(@FirstName, @LastName, @Value)";
+                 participation = await conn.ExecuteAsync(sql: command, param: participation);
+                return participation;
+            
+            
+
+        }
     }
-}
+
+    }
+
