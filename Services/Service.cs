@@ -16,27 +16,37 @@ namespace API_1.Servicos
         {
             _repository = repository;
         }
-        public async Task<Participation> Delete(int id)
+        public async Task<int> Delete(int Codigo)
         {
-             
-                return await _repository.DeleteAsync(id);        
+            if ( Codigo >= 2)
+            {
+                return 0;
+            }
+            int result = Codigo;
+                return await _repository.Delete(result);        
            
         }
 
-        public async Task<Participation> Get(int id)
+        public async Task<Participation> Get(int Codigo)
         {
-            return await _repository.GetParticipationsIdAsync(id);
+            return await _repository.GetId(Codigo);
         }
 
         public async Task<IEnumerable<Participation>> GetAll()
         {
-            return await _repository.GetParticipationsAsync();
+            return await _repository.GetAll();
         }
 
-        public async Task<Participation> Save(Participation participation)
+        public async Task<int> Save(Participation participation)
         {
-           
-            return  await _repository.SaveAsync(participation);
+            if (participation == null)
+            {
+                await _repository.Save(participation);
+                int result = participation;
+                return result;  
+            }
+            return 0;
+
         }
 
        

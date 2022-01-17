@@ -32,9 +32,11 @@ namespace API_1
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<DbSession>();
+           // services.AddScoped<IDBConnection>();
+            services.AddScoped<IParticipation, ParticipationRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddDbContext<Banco1Context>(options => options.UseSqlServer("Server=.,Database=Banco1;trusted_Connection=true;MultipleactiveResultSets=true"));
+            services.AddDbContext<Banco1Context>(options => 
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient< IParticipation, ParticipationRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace API_1.Repositories
 {
-    interface IParticipation
+  public  interface IParticipation
     {
-        Task<List<Participation>> GetParticipationsAsync();
-        Task<Participation> GetParticipationsIdAsync(int id);
-        Task<Participation> SaveAsync(Participation participation);
-        Task<Participation> DeleteAsync(int id);
+        Participation Find(int Codigo);
+        List<Participation> GetAll();
+        Participation Add(Participation participation);
+        void Remove(int Codigo);
+
     }
 }

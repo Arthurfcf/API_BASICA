@@ -11,7 +11,7 @@ namespace API_1.Models
 
 
         [Key]
-        public int Id { get; set; }
+        public int Codigo { get; set; }
 
         [Required]
         [MaxLength(50)]

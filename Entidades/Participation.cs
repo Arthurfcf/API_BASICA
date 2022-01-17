@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,9 +9,8 @@ namespace API_1.Entidades
 {
     public class Participation
     {
-        [Key]
-        [Required]
-        public int Id { get; set; }
+        [Key][DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Codigo { get; set; }
 
         [Required][MaxLength(50)][MinLength(3)]
         public string FirstName { get; set; }
@@ -22,6 +22,11 @@ namespace API_1.Entidades
         public float Value { get; set; }
 
         public static implicit operator Participation(int v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static implicit operator int(Participation v)
         {
             throw new NotImplementedException();
         }

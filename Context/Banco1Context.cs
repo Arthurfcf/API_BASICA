@@ -9,6 +9,7 @@ namespace API_1.Context
 {
     public class Banco1Context : DbContext
     {
+       
     
         public DbSet<Participation> Participations { get; set; }
         public Banco1Context(DbContextOptions<Banco1Context> options) : base(options) { }
@@ -17,7 +18,7 @@ namespace API_1.Context
         {
             base.OnModelCreating(builder);
             
-            builder.Entity<Participation>().HasKey(x => new { x.Id });
+            builder.Entity<Participation>().HasKey(x => new { x.Codigo });
            
             builder.Entity<Participation>()
                 .Property(v => v.Value)

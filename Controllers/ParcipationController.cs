@@ -16,48 +16,30 @@ namespace API_1.Controllers
     //Mudar o nome dos métodos  
     //Padrão Save, Delete  e Get 
     //Classe nome Participation + Objetivo Service ou Repo ex
-    [Controller][Route("controller")]
+    [Controller]
+    [Route("controller")]
     public class ParcipationController : ControllerBase
     {
-        private readonly Service _service;
-        private readonly IMapper _mapper;
+        private readonly IParticipation _participation;
+       // private readonly IMapper _mapper;
 
-        public  ParcipationController(Service service , Mapper mapper)
+        public ParcipationController(IParticipation participation)
         {
-            _service = service;
-            _mapper = mapper;
+            _participation = participation;
+        }
+
+        
+                [HttpPost]
+                //objeto de entrada 
+                // true ou false 
+                public async Task<IActionResult> Save([FromBody]Participation participation)
+        {
+            return await _participation.Add(participation);
         }
 
 
-        [HttpPost]
-        //objeto de entrada 
-        // true ou false 
-        public async Task<IActionResult> SaveAsync([FromBody]ParticipationDto participationDto)
-        {
-           
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-           try
-            {
-                Participation participation = _mapper.Map<Participation>(participationDto);
-                var result = await _service.Save(participation);
-                if (result != null)
-                {
-                    return Ok(result);
-                }
-                else
-                {
-                    return BadRequest();
-                }
                 
-            }
-            catch (ArgumentException e)
-            {
-                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-            }
-        }
+        
 
         // lista de objetos 
         //sem parametros de entrada
@@ -65,44 +47,30 @@ namespace API_1.Controllers
         [Route("participation")]
         public async Task<IActionResult> GetAll()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            try
-            {
-                return Ok(await _service.GetAll());
-
-            }catch(ArgumentException e)
-            {
-                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-            }
-
-           
+            return 
+            var result = await _participation.GetAll();
+            return Ok(result);
         }
+    
+
 
         [HttpGet("{id}")]
         //return objeto 
         // entrar um id 
-        public async Task<IActionResult> GetAll(int id)
+        public async Task<IActionResult> GetId(int Codigo)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-            try
-            {
-                return Ok(await _service.Get(id));
-            }
-            catch (ArgumentException e)
-            {
-                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-            }
+          
+                var participation = _participation.Find(Codigo);
+                return participation
+           
         }
 
         //true ou false
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteAsync(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             if (!ModelState.IsValid)
             {
@@ -110,7 +78,7 @@ namespace API_1.Controllers
             }
             try
             {
-                return Ok(await _service.Delete(id));
+                return Ok(await _participation.Delete(id));
             }
             catch (ArgumentException e)
             {

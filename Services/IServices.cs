@@ -12,8 +12,8 @@ namespace API_1.Services
          
         Task<IEnumerable<Participation>> GetAll();
 
-        Task<Participation> Save(Participation participation);
+        Task<int> Save(Participation participation);
 
-        Task<Participation> Delete (int id);
+        Task<int> Delete (int id);
     }
 }
